@@ -1,11 +1,15 @@
 import * as React from 'react';
 import {GetCreatures} from '../repositories/Creatures'
+import {Creature as CreatureComponent} from "../components";
+import {CreatureEntity} from "../models"
+import {CCard, CContainer, CRow, CCol} from '@coreui/react'
+
 
 interface Props {
 }
 
-export const Dashboard: React.FC<Props> = (props) => {
-    const [creatures, setCreatures] = React.useState([]);
+export const Dashboard: React.FC<Props> = () => {
+    const [creatures, setCreatures] = React.useState<[CreatureEntity]>();
 
     React.useEffect(() => {
         const interval = 1000 * 60;
@@ -36,16 +40,22 @@ export const Dashboard: React.FC<Props> = (props) => {
     if (creatures) {
         for (let i = 0; i < creatures.length; i++) {
             const creature = creatures[i];
-            console.log(creature);
-            creatureElements.push(<div>{creature["ip_address"]}</div>)
+            creatureElements.push(<CreatureComponent key={creature.id} ipAddress={creature.ip_address}
+                                                     idString={creature.id} viruses={creature.viruses}/>)
         }
     }
 
     return (
         <div>
-            <h2>Dashboard</h2>
-            <div>
-                {creatureElements}
+            <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+                <div className="body flex-grow-1 px-3">
+                    <CContainer lg style={{padding: "20px"}}>
+                        <h1 className="title" style={{padding: "20px", textAlign: "center"}}>Conceptual Virus Dashboard</h1>
+                        <CRow>
+                            {creatureElements}
+                        </CRow>
+                    </CContainer>
+                </div>
             </div>
         </div>
     );

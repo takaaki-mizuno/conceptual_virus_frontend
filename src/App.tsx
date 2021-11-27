@@ -7,10 +7,10 @@ import {
 import './App.css';
 import {Dashboard} from "./containers"
 
+
 function App() {
   return (
       <Router>
-        <h1>Conceptual Virus Dashboard</h1>
           <Routes>
               <Route path="/" element={<Dashboard />} />
           </Routes>
