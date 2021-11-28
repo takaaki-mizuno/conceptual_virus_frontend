@@ -1,6 +1,6 @@
 export async function GetCreatures() {
     try {
-        const response = await fetch('http://localhost/api/dashboard/creatures', {
+        const response = await fetch('/api/dashboard/creatures', {
             method: 'GET',
 //            mode: 'no-cors'
         })
